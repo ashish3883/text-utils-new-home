@@ -1,11 +1,11 @@
 
-import { Route, Routes } from 'react-router-dom';
+// import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Alerts from './components/Alerts';
 import NavBar from './components/NavBar';
 import TextForm from './components/TextForm';
 import React, {useState} from 'react'
-import About from './components/About';
+// import About from './components/About';
 
 
 function App() {
@@ -38,11 +38,12 @@ function App() {
     <NavBar title="Text-Utils" about="About Us" mode={mode} toggleMode={toggleMode} /> 
     <Alerts alert={alert}/>
     <div className="container">
-    <Routes>
-      <Route path='/' element={<TextForm heading="Enter Your Text Here" showAlert={showAlert} mode={mode}/>} />
-      <Route path='about' element={<About mode={mode}/>} />
-    </Routes>
-    </div> 
+      <TextForm heading="Enter Your Text Here" showAlert={showAlert} mode={mode}/>
+      </div> 
+    {/* <Routes>
+      {/* <Route path='/' element={<TextForm heading="Enter Your Text Here" showAlert={showAlert} mode={mode}/>} /> */}
+      {/* <Route path='about' element={<About mode={mode}/>} /> */}
+    {/* </Routes> */} 
     </>
   );
 }
