@@ -30,6 +30,7 @@ export default function TextForm(props) {
       newText.select();
       navigator.clipboard.writeText(newText.value);
       props.showAlert("Text Coppied", "success")
+      document.getSelection().removeAllRanges()
     }
     else{
       props.showAlert("Empty text box", "error")
@@ -65,38 +66,44 @@ export default function TextForm(props) {
           </div>
           <button
             type="button"
-            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1`}
+            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1 my-1`}
             onClick={handleUpperCase}
+            disabled={text.length===0}
           >
-            Convert to Upper Case
+            To Upper Case
           </button>
           <button
             type="button"
-            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1`}
+            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1 my-1`}
             onClick={handleLowerCase}
+            disabled={text.length===0}
           >
-            Convert to Lower Case
+            To Lower Case
           </button>
           <button
             type="button"
-            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1`}
+            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1 my-1`}
             onClick={() => {
               setText("");
             }}
+            disabled={text.length===0}
           >
             Clear Text
           </button>
           <button
             type="button"
-            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1`}
+            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1 my-1`}
             onClick={handleCopy}
+            disabled={text.length===0}
+            document
           >
             Copy Text
           </button>
           <button
             type="button"
-            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1`}
+            className={`btn btn-${props.mode==='light'?"primary":"secondary"} mx-1 my-1`}
             onClick={removeExtraSpaces}
+            disabled={text.length===0}
           >
             Remove Extra Spaces
           </button>
@@ -104,9 +111,9 @@ export default function TextForm(props) {
         <div className="container">
           <h1>Your Text Summary</h1>
           <p>
-            {text.split(" ").length} Words & {text.length} Charecters
+            {text.split(/\s+/).filter((el)=>{return el.length!==0}).length} Words & {text.length} Charecters
           </p>
-          <p>{0.008 * text.length} Minutes to read</p>
+          <p>{0.008 * text.split(" ").filter((el)=>{return el.length!==0}).length} Minutes to read</p>
           <h3>Preview</h3>
           <p>{text.length>0?text:"Write in textbox to preview it"}</p>
         </div>
